@@ -1,0 +1,19 @@
+<div class="story">
+<h1>Feature: Play tictactoe win</h1>
+<div class="path">file:stories/tictactoe_scenarios.story</div>
+<div class="narrative"><h2>Narrative:</h2>
+<div class="element inOrderTo"><span class="keyword inOrderTo">As a</span> game member,</div>
+<div class="element asA"><span class="keyword asA">I want to</span> play TicTacToe,</div>
+<div class="element iWantTo"><span class="keyword iWantTo">So that</span> I can win</div>
+</div>
+<div class="scenario">
+<h2>Scenario: player who connects horizontal line first wins</h2>
+<div class="step successful">Given user browses to <span class="step parameter">http://localhost:8080/tictactoe/</span></div>
+<div class="step successful">When first move X is (1,1)</div>
+<div class="step successful">When second move O is (1,2)</div>
+<div class="step successful">When third move X is (2,1)</div>
+<div class="step successful">When fourth move O is (2,3)</div>
+<div class="step successful">When fifth move X is (3,1)</div>
+<div class="step successful">Then  winner is X</div>
+</div>
+</div>

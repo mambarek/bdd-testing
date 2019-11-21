@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TicTacToeGameState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tictactoe</a> &gt; <a href="index.source.html" class="el_package">com.sybetech.business</a> &gt; <span class="el_source">TicTacToeGameState.java</span></div><h1>TicTacToeGameState.java</h1><pre class="source lang-java linenums">package com.sybetech.business;
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import org.jongo.FindOne;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+
+public class TicTacToeGameState {
+
+    static final String DB_NAME = &quot;tic-tac-toe-db&quot;;
+    static final String COLLECTION_NAME = &quot;tic-tac-toe-collection&quot;;
+    private MongoCollection mongoCollection; // CRUD
+
+<span class="fc" id="L14">    public TicTacToeGameState() {</span>
+        // use new Jongo (MongoClient().getDB).getCollection to initialize mongoCollection
+<span class="fc" id="L16">        this.mongoCollection = new Jongo(new MongoClient().getDB(DB_NAME)).getCollection(COLLECTION_NAME);</span>
+<span class="fc" id="L17">    }</span>
+
+    public boolean save(TicTacToeGameMove move) {
+        try {
+<span class="fc" id="L21">            this.getMongoCollection().save(move);</span>
+<span class="fc" id="L22">        } catch (Exception e) {</span>
+<span class="fc" id="L23">            e.printStackTrace();</span>
+<span class="fc" id="L24">            return false;</span>
+<span class="fc" id="L25">        }</span>
+<span class="fc" id="L26">        return true;</span>
+    }
+
+    public boolean clear() {
+        try {
+<span class="fc" id="L31">            this.getMongoCollection().drop();</span>
+<span class="fc" id="L32">        } catch (Exception e) {</span>
+            //e.printStackTrace();
+<span class="fc" id="L34">            return false;</span>
+<span class="fc" id="L35">        }</span>
+<span class="fc" id="L36">        return true;</span>
+    }
+
+    public TicTacToeGameMove findById(int id) {
+<span class="nc" id="L40">        FindOne one = this.getMongoCollection().findOne(&quot;{_id: #}&quot;, id);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if(one == null) return null;</span>
+<span class="nc" id="L42">        TicTacToeGameMove as = one.as(TicTacToeGameMove.class);// see jongo on jongo.org</span>
+<span class="nc" id="L43">        return as;</span>
+    }
+
+    public MongoCollection getMongoCollection() {
+<span class="fc" id="L47">        return mongoCollection;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

@@ -1,0 +1,4 @@
+#org.jbehave.core.embedder.StoryManager
+#Tue Oct 01 16:38:57 CEST 2019
+total=6000
+file\:stories/tictactoe_scenarios.story=6000
